@@ -58,12 +58,25 @@ func exitSafely() {
 
 func startMonitoring() {
 	fmt.Println("Starting monitor...")
-	siteUrl := "https://www.alura.com.br"
-	response, _ := http.Get(siteUrl)
+
+	websites := []string{
+		"https://www.alura.com.br/",
+		"https://www.udemy.com/",
+		"https://httpstat.us/404",
+		"https://httpstat.us/500",
+	}
+
+	for _, siteURL := range websites {
+		requestAndVerifySiteURL(siteURL)
+	}
+}
+
+func requestAndVerifySiteURL(siteURL string) {
+	response, _ := http.Get(siteURL)
 
 	if response.StatusCode == 200 {
-		fmt.Println(siteUrl, "is up!")
+		fmt.Println(siteURL, "is up!")
 	} else {
-		fmt.Println(siteUrl, "is down!\nStatus:", response.StatusCode)
+		fmt.Println(siteURL, "is down!\nStatus:", response.StatusCode)
 	}
 }
