@@ -2,26 +2,29 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 )
 
 func main() {
 	introduction()
-	showCommandOptions()
+	for {
+		showCommandOptions()
 
-	userCommand := readUserCommand()
+		userCommand := readUserCommand()
 
-	switch userCommand {
-	case 1:
-		fmt.Println("Starting monitor...")
-	case 2:
-		fmt.Println("Showing logs...")
-	case 0:
-		fmt.Println("Exiting...")
-		exitSafely()
-	default:
-		fmt.Println("Invalid option, exiting...")
-		exitSafely()
+		switch userCommand {
+		case 1:
+			startMonitoring()
+		case 2:
+			fmt.Println("Showing logs...")
+		case 0:
+			fmt.Println("Exiting...")
+			exitSafely()
+		default:
+			fmt.Println("Invalid option, exiting...")
+			exitSafely()
+		}
 	}
 }
 
@@ -51,4 +54,16 @@ func readUserCommand() int {
 
 func exitSafely() {
 	os.Exit(0)
+}
+
+func startMonitoring() {
+	fmt.Println("Starting monitor...")
+	siteUrl := "https://www.alura.com.br"
+	response, _ := http.Get(siteUrl)
+
+	if response.StatusCode == 200 {
+		fmt.Println(siteUrl, "is up!")
+	} else {
+		fmt.Println(siteUrl, "is down!\nStatus:", response.StatusCode)
+	}
 }
