@@ -1,9 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -63,12 +66,7 @@ func exitSafely() {
 func startMonitoring() {
 	fmt.Println("Starting monitor...")
 
-	websites := []string{
-		"https://www.alura.com.br/",
-		"https://www.udemy.com/",
-		"https://httpstat.us/404",
-		"https://httpstat.us/500",
-	}
+	websites := getFileContent()
 
 	for i := 0; i < AMOUNT_MONITORING; i++ {
 		for _, siteURL := range websites {
@@ -86,4 +84,29 @@ func requestAndVerifySiteURL(siteURL string) {
 	} else {
 		fmt.Println(siteURL, "is down!\nStatus:", response.StatusCode)
 	}
+}
+
+func getFileContent() []string {
+	var websites []string
+	file, err := os.Open("resources/sites.txt")
+
+	if err != nil {
+		fmt.Println("An error occurs during file open ->", err)
+	}
+
+	reader := bufio.NewReader(file)
+
+	for {
+		line, err := reader.ReadString('\n')
+		line = strings.TrimSpace(line)
+		websites = append(websites, line)
+
+		if err == io.EOF {
+			break
+		}
+	}
+
+	file.Close()
+
+	return websites
 }
