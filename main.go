@@ -4,7 +4,11 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"time"
 )
+
+const AMOUNT_MONITORING = 5
+const SECONDS_BETWEEN_REQUESTS = 3
 
 func main() {
 	introduction()
@@ -66,8 +70,11 @@ func startMonitoring() {
 		"https://httpstat.us/500",
 	}
 
-	for _, siteURL := range websites {
-		requestAndVerifySiteURL(siteURL)
+	for i := 0; i < AMOUNT_MONITORING; i++ {
+		for _, siteURL := range websites {
+			requestAndVerifySiteURL(siteURL)
+		}
+		time.Sleep(SECONDS_BETWEEN_REQUESTS * time.Second)
 	}
 }
 
