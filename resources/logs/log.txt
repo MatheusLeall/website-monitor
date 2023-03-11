@@ -1,0 +1,10 @@
+2023-03-11 18:22:51 - https://www.udemy.com/- is online:true
+2023-03-11 18:22:51 - https://www.alura.com.br/- is online:true
+2023-03-11 18:22:55 - https://www.udemy.com/- is online:true
+2023-03-11 18:22:55 - https://www.alura.com.br/- is online:true
+2023-03-11 18:22:59 - https://www.udemy.com/- is online:true
+2023-03-11 18:22:59 - https://www.alura.com.br/- is online:true
+2023-03-11 18:23:03 - https://www.udemy.com/- is online:true
+2023-03-11 18:23:03 - https://www.alura.com.br/- is online:true
+2023-03-11 18:23:08 - https://www.udemy.com/- is online:true
+2023-03-11 18:23:08 - https://www.alura.com.br/- is online:true
